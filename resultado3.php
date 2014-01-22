@@ -24,7 +24,7 @@
          //validar edad
         if (!validarEdad($edad)) {
             $error = true;
-            $mensaje_error = "Edad debe ser un número";
+            $mensaje_error .= "Edad debe ser un número";
   
         //Calculo y salida
          if (!$error) {
