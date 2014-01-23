@@ -9,15 +9,14 @@
         <div>Validación formulario</div>
         <?php
         //Entrada datos
-            if (isset($_REQUEST['nombre'])) {
-                $nombre = $_REQUEST['nombre'];
-            }
-            $edad = $_REQUEST['edad'];
+           $nombre = $_REQUEST['nombre'];
+           $edad = $_REQUEST['edad'];
         //Validar datos
         $error = false;
         $mensaje_error = " ERROR ";
         //validar nombre
-         if ($nombre == "") {
+        $nombre = limpiarTexto($nombre);
+         if (!validarNombreEstricto($nombre)) {
              $error = true;
              $mensaje_error .= " Nombre obligatorio ";
          }
@@ -25,6 +24,7 @@
         if (!validarEdad($edad)) {
             $error = true;
             $mensaje_error .= "Edad debe ser un número";
+        }
   
         //Calculo y salida
          if (!$error) {

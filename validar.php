@@ -41,3 +41,40 @@ function comprobarRango ($valor, $inicio, $final) {
 function validarEdad ($valor) {
     return(validarEntero($valor) && comprobarRango($valor, EDAD_MINIMA, EDAD_MAXIMA));
 }
+
+function limpiarTexto ($valor) {
+   if(isset($valor)) {
+        $valor = htmlspecialchars($valor, ENT_QUOTES, "ISO-8859-1");
+        $valor = strip_tags(trim($valor));
+} else {
+    $valor = ""; 
+}
+return $valor;
+}
+
+
+function validarNombre ($valor) {
+    $valor = limpiarTexto($valor);
+    if ($valor == "") {
+        return false;
+    } else {
+        return true;
+    }
+}
+ 
+/**
+ * Verifica que un nombre solo tenga letras, al menos una
+ */
+/**
+ * 
+ * @param type $valor
+ * @return boolean
+ */
+function validarNombreEstricto ($valor) {
+    $patron = "/^[[:alpha:]]+$/";
+    if (preg_match($patron, $valor)) {
+        return true;
+    } else {
+        return false;
+    }
+}
