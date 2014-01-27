@@ -12,14 +12,22 @@
                 $nombre = $_REQUEST['nombre'];
             }
             $edad = $_REQUEST['edad'];
-        //Validar datos
+            
+            
+      
+            //Validar datos
         $error = false;
         $mensaje_error = " ERROR ";
+        
+        
         //validar nombre
          if ($nombre == "") {
              $error = true;
              $mensaje_error .= " Nombre obligatorio ";
          }
+         
+         
+         
          //validar edad
         if (!is_numeric($edad)) {
             $error = true;
@@ -32,6 +40,8 @@
                 $mensaje_error = " La edad debe ser un numero entre 0 y 100 <br> ";
             }
         }
+        
+        
         
         //Calculo y salida
          if (!$error) {
