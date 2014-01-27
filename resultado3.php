@@ -72,9 +72,7 @@
                 echo "sexo = ".$sexo."</br>";
                 echo "Estado civil = ".$estado."</br>";
                 echo "Aficion = ".$aficiones."</br>";
-                foreach ($aficiones as $aficion) {
-                    echo $aficion."</br>";
-                }
+                print_r($aficiones);
             }
           } else {
             //Si ha error
