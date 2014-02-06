@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once 'funcionesRegistro.php';
 require_once 'errores_registro.php';
 /**
@@ -15,11 +16,12 @@ function validarDatosRegistro() {
     
     $resultadoValidacion = array();
     /**
-     * Comprobamos que existen las variables
+     * 
      */
     $login = (isset($_REQUEST['login']))?
             $_REQUEST['login']:"";
-    $password = (isset($_REQUEST['password']))?
+
+   $password = (isset($_REQUEST['password']))?
             $_REQUEST['password']:"";
     $password2 = (isset($_REQUEST['password2']))?
             $_REQUEST['password2']:"";
@@ -62,9 +64,9 @@ function validarDatosRegistro() {
                 echo "Datos correctos. Se puede registrar.";
             } else {
                 $_SESSION['errores'] = $errores;
-                $URL = "formulario_registro1.php".
+                $URL = "formulario_registro1.php?".
                         $_SERVER['QUERY_STRING'];
-                header ('location:' .$URL);
+                header ('Location:' .$URL);
                 
             }
             
