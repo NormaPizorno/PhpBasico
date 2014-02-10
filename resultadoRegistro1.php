@@ -14,7 +14,7 @@ function validarDatosRegistro() {
      * Validar email
      */
     
-    $resultadoValidacion = array();
+    $resultadoValidacion = array ('','','','');
     /**
      * 
      */
@@ -31,23 +31,33 @@ function validarDatosRegistro() {
      * Hacemos if relaccionados con las funciones de "funcionesRegistro"
      */
     if (!validarLogin($login)) {
-        $resultadoValidacion[] = MSG_ERR_LOGIN; 
+        $resultadoValidacion[0] = MSG_ERR_LOGIN; 
         
     }
     if (!validarPassword($password)) {
-        $resultadoValidacion[] = MSG_ERR_PASSWORD;
+        $resultadoValidacion[1] = MSG_ERR_PASSWORD;
         
     }
      
     if (!PassIgual($password, $password2)) {
-        $resultadoValidacion[] = MSG_ERR_PASSWORD2;
+        $resultadoValidacion[2] = MSG_ERR_PASSWORD2;
         
     }
     if (!ValidarEmail($email)) {
-        $resultadoValidacion[] = MSG_ERR_EMAIL;
+        $resultadoValidacion[3] = MSG_ERR_EMAIL;
         
     }
     return $resultadoValidacion;
+}
+
+function hayErrores ($errores) {
+    for ($i=0; $i<4; $i++) {
+        if (strlen($errores[$i])>0) {
+            return TRUE;
+        }
+            
+    }
+    return FALSE;
 }
 ?>
 <html>
@@ -60,8 +70,8 @@ function validarDatosRegistro() {
         <div>Resultado Registro</div>
         <?php
             $errores = validarDatosRegistro();
-            if (count ($errores) == 0) {
-                echo "Datos correctos. Se puede registrar.";
+            if (!hayErrores ($errores)) {
+                echo "Datos correctos. Se puede registrar...";
             } else {
                 $_SESSION['errores'] = $errores;
                 $URL = "formulario_registro1.php?".
