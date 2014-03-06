@@ -2,29 +2,29 @@
 session_start();
 
 // Estructura campos del formulario
-$login = (isset($_REQUEST['login']))?
-            $_REQUEST['login']:"";
+$login = (isset($_SESSION['login']))?
+            $_SESSION['login']:"";
 
-//$password no se recupera ...
-//$password2 no se recupera
+//$password no se recupera, se reescribe siempre
+//$password2 no se recupera, se reescribe siempre
 
-$email = (isset($_REQUEST['email']))?
-            $_REQUEST['email']:"";
+$email = (isset($_SESSION['email']))?
+            $_SESSION['email']:"";
 
 // Estructura para errores
-$errLogin = (isset($_REQUEST['errLogin']))?
-            $_REQUEST['errLogin']: FALSE;
-$errPassword = (isset($_REQUEST['errPassword']))?
-            $_REQUEST['errPassword']: FALSE;
-$errPassword2 = (isset($_REQUEST['errPassword2']))?
-            $_REQUEST['errPassword2']: FALSE;
-$errEmail = (isset($_REQUEST['errEmail']))?
-            $_REQUEST['errEmail']: FALSE;
+$errLogin = (isset($_SESSION['errLogin']))?
+            $_SESSION['errLogin']: FALSE;
+$errPassword = (isset($_SESSION['errPassword']))?
+            $_SESSION['errPassword']: FALSE;
+$errPassword2 = (isset($_SESSION['errPassword2']))?
+            $_SESSION['errPassword2']: FALSE;
+$errEmail = (isset($_SESSION['errEmail']))?
+            $_SESSION['errEmail']: FALSE;
 
-unset($_SESSION['errLogin']);
-unset($_SESSION['errPassword']);
-unset($_SESSION['errPassword2']);
-unset($_SESSION['errEmail']);
+$_SESSION['errLogin']=FALSE;
+$_SESSION['errPassword']=FALSE;
+$_SESSION['errPassword2']=FALSE;
+$_SESSION['errEmail']=FALSE;
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,10 @@ and open the template in the editor.
 <meta name="viewport" content="width=device-width">
 </head>
 <body>
-<div>Registro</div>
+<div>Registro</div> 
+    <div><?php 
+        print_r($login);
+    ?></div>
 <div>
     <?php
     print_r($errores);

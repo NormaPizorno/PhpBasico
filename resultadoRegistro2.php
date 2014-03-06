@@ -47,7 +47,7 @@ function validarDatosRegistro() {
         $_SESSION['errEmail'] = TRUE;
         
     }
-    return $resultadoValidacion;
+    
 }
 
 
@@ -62,19 +62,15 @@ function validarDatosRegistro() {
         <div>Resultado Registro</div>
         <?php
            validarDatosRegistro();
-            if (!$_SESSION['errLogin'] && $_SESSION['errPassword']) {
-                echo "Datos correctos. Se puede registrar...";
+            if (!$_SESSION['errLogin'] && !$_SESSION['errPassword']
+                && !$_SESSION['errPassword2'] && !$_SESSION['errEmail']) {
+                echo "Datos correctos. Se puede registrar ...";
             } else {
-                $_SESSION['errores'] = $errores;
-                $URL = "formulario_registro2.php?".
-                        $_SERVER['QUERY_STRING'];
+                $URL = "formulario_registro2.php";
                 header ('Location:' .$URL);
                 
             }
-            
-            
-           
-            
+               
         ?>
     </body>
 </html>
